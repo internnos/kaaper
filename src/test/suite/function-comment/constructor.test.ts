@@ -13,7 +13,7 @@ suite("function-comment: constructor", () => {
       "../../../../test_assets/ERC20.cairo"
     );
     const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
-    const commentText = CairoParser.parseComments(functionText);
+    const commentText = CairoParser.parseCommentLines(functionText);
     const descParser = new FunctionCommentDescParser();
 
     {
@@ -92,7 +92,7 @@ suite("function-comment: constructor", () => {
     );
     const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
     
-    const commentText = CairoParser.parseComments(functionText);
+    const commentText = CairoParser.parseCommentLines(functionText);
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
 
     {
@@ -221,7 +221,7 @@ suite("function-comment: constructor", () => {
 
     const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
     
-    const commentText = CairoParser.parseComments(functionText);
+    const commentText = CairoParser.parseCommentLines(functionText);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
 
     {
@@ -426,7 +426,7 @@ suite("function-comment: constructor", () => {
 
     const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
     
-    const commentText = CairoParser.parseComments(functionText);
+    const commentText = CairoParser.parseCommentLines(functionText);
     const returnsParser = new FunctionCommentReturnsParser();
 
     {

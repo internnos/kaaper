@@ -9,8 +9,9 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    const constructorParser = new CairoParser(pathFile, "constructor");
-    const constructorText = constructorParser.parseFunctionScope();
+    const constructorText = CairoParser.parseFunctionScope(pathFile, "constructor")
+
+
     const functionSignatureParser = new FunctionSignatureParser();
     const attributeName =
       functionSignatureParser.getAttributeName(constructorText);
@@ -21,8 +22,8 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    let constructorParser = new CairoParser(pathFile, "constructor");
-    const constructorText = constructorParser.parseFunctionScope();
+    const constructorText = CairoParser.parseFunctionScope(pathFile, "constructor");
+    
     const functionSignatureParser = new FunctionSignatureParser();
     const functionName =
       functionSignatureParser.getFunctionName(constructorText);
@@ -34,8 +35,8 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    let constructorParser = new CairoParser(pathFile, "constructor");
-    const constructorText = constructorParser.parseFunctionScope();
+    const constructorText = CairoParser.parseFunctionScope(pathFile, "constructor");
+    
     const functionSignatureParser = new FunctionSignatureParser();
     const implicitArgs =
       functionSignatureParser.getImplicitArgs(constructorText);
@@ -66,8 +67,8 @@ suite("function-signature: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    let constructorParser = new CairoParser(pathFile, "constructor");
-    const constructorText = constructorParser.parseFunctionScope();
+    const constructorText = CairoParser.parseFunctionScope(pathFile, "constructor");
+    
     const functionSignatureParser = new FunctionSignatureParser();
     const explicitArgs =
       functionSignatureParser.getExplicitArgs(constructorText);

@@ -5,14 +5,9 @@ let map = new Map();
 map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#]+\s/gm);
 
 export default class CairoParser {
-  public text: string;
-  public regex: RegExp;
   public supportedComments: Array<string>;
-
-  constructor(public filePath: string, name: string) {
-    this.filePath = filePath;
-    this.text = fs.readFileSync(filePath, "utf8");
-    this.regex = map.get(name);
+  
+  constructor() {
     this.supportedComments = [
       "Desc",
       "Implicit args",
@@ -21,22 +16,26 @@ export default class CairoParser {
       "Raises",
     ];
   }
+  static getRegex(name: string): RegExp {
+    return map.get(name);
+  }
 
-  parseFunctionScope(): string {
-    const result = this.text.match(this.regex);
+  static parseFunctionScope(filePath: string, name: string): string {
+  const text = fs.readFileSync(filePath, "utf8");
+    const result = text.match(this.getRegex(name));
     if (result) {
       return result[0];
     }
     return "";
   }
 
-  parseComments(line: string): RegExpMatchArray | null {
+  static parseComments(line: string): RegExpMatchArray | null {
     const comments = line.match(/#\s+(.+)/gm);
     return comments;
   }
+ 
+  // parseWholeScope()
 
-  // TODO: running parser on the whole scope
 
-
-  // TODO: output the parsing result into a proper data structure
+  
 }

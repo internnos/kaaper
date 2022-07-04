@@ -12,9 +12,8 @@ suite("function-comment: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    const constructorParser = new CairoParser(pathFile, "constructor");
-    const functionText = constructorParser.parseFunctionScope();
-    const commentText = constructorParser.parseComments(functionText);
+    const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
+    const commentText = CairoParser.parseComments(functionText);
     const descParser = new FunctionCommentDescParser();
 
     {
@@ -91,9 +90,9 @@ suite("function-comment: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    const constructorParser = new CairoParser(pathFile, "constructor");
-    const functionText = constructorParser.parseFunctionScope();
-    const commentText = constructorParser.parseComments(functionText);
+    const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
+    
+    const commentText = CairoParser.parseComments(functionText);
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
 
     {
@@ -220,9 +219,9 @@ suite("function-comment: constructor", () => {
       "../../../../test_assets/ERC20.cairo"
     );
 
-    const constructorParser = new CairoParser(pathFile, "constructor");
-    const functionText = constructorParser.parseFunctionScope();
-    const commentText = constructorParser.parseComments(functionText);
+    const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
+    
+    const commentText = CairoParser.parseComments(functionText);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
 
     {
@@ -425,9 +424,9 @@ suite("function-comment: constructor", () => {
       "../../../../test_assets/ERC20.cairo"
     );
 
-    const constructorParser = new CairoParser(pathFile, "constructor");
-    const functionText = constructorParser.parseFunctionScope();
-    const commentText = constructorParser.parseComments(functionText);
+    const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
+    
+    const commentText = CairoParser.parseComments(functionText);
     const returnsParser = new FunctionCommentReturnsParser();
 
     {

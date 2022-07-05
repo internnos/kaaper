@@ -15,20 +15,18 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
     return false;
   }
 
-  returnOutput(line: string): Map<string, string> | null {
+  returnOutput(line: string): FunctionComment | null {
     if (this.isInsideScope(line)) {
-      const match = line.match(/#\s+(.+)/);
-      if (match) {
-        const response = new Map<string, string>();
-        const result = match[1].split("(");
-        response.set("name", result[0]);
-        try {
-          response.set("type", result[1].split(")")[0]);
-        } catch (e) {
-          response.set("type", "");
-        }
+      const matchCommentLines = line.match(/#\s+(.+)/);
+      if (matchCommentLines) {
+        const matchInterface = line.match(/#\s+(\w+)(\(?([\w\*]+)\))?$/)
+        if (matchInterface) {
+          if (matchInterface[3]){
+            return {"name": matchInterface[1], "type": matchInterface[3], "desc": ""};
 
-        return response;
+          }
+          return {"name": matchInterface[1], "type": "", "desc": ""};
+        }
       }
     }
     return null;

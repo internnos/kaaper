@@ -15,33 +15,18 @@ export default class FunctionCommentReturnsParser extends BaseCommentParser {
     return false;
   }
 
-  returnOutput(line: string): Map<string, string> | null {
+  returnOutput(line: string): FunctionComment | null {
     if (this.isInsideScope(line)) {
-      const match = line.match(/#\s+(.+)/);
-      const response = new Map<string, string>();
+      const matchCommentLines = line.match(/#\s+(.+)/);
 
-      if (match) {
-        if (match[1] === "None") {
-          response.set("desc", "None");
-          return response;
+      if (matchCommentLines) {
+        if (matchCommentLines[1] === "None") {
+          return {"name": "", "type": "", "desc": "None"};
         }
-        const split = match[1].split(":");
-        const left = split[0];
-        const right = split[1];
-
-        const result = left.split("(");
-        response.set("name", result[0]);
-        try {
-          response.set("type", result[1].split(")")[0]);
-        } catch (e) {
-          response.set("type", "");
+        const matchInterface = line.match(/(\w+)(\(\w+\)):(.*)/)
+        if (matchInterface) {
+          return {"name": matchInterface[1], "type": matchInterface[2], "desc": matchInterface[3]};
         }
-        try {
-          response.set("desc", right.trim());
-        } catch {
-          response.set("desc", "");
-        }
-        return response;
       }
     }
     return null;

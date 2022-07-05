@@ -15,12 +15,11 @@ export default class FunctionCommentDescParser extends BaseCommentParser {
     return false;
   }
 
-  returnOutput(line: string): Map<string, string> | null {
+  returnOutput(line: string): FunctionComment | null {
     if (this.isInsideScope(line)) {
       const match = line.match(/#\s+(.+)/);
       if (match) {
-        const response = new Map<string, string>();
-        response.set("desc", match[1].trim());
+        const response = {name: "", type: "", desc: match[1]};
         return response;
       }
     }
@@ -35,5 +34,13 @@ export default class FunctionCommentDescParser extends BaseCommentParser {
       }
     }
     return false;
+  }
+
+  getOutput(commentLines: Array<string>): Array<FunctionComment> {
+    var outputResult: Array<FunctionComment> = [];
+    for (const commentLine of commentLines) {
+      outputResult.push({name: "", type: "", desc: commentLine});
+    }
+    return outputResult;
   }
 }

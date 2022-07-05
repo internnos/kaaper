@@ -60,12 +60,9 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-
-      assert.equal(
-        "Initialize the contract",
-        output?.get("desc"),
-        `failed to get desc comment line ${line}`
-      );
+      
+      const targetOutput = {"name": "", "type": "", "desc": "Initialize the contract"};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -143,8 +140,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("syscall_ptr", output?.get("name"), "map not equal");
-      assert.equal("felt*", output?.get("type"), "map not equal");
+      const targetOutput = {"name": "syscall_ptr", "type": "felt*", "desc": ""};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -168,8 +165,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("pedersen_ptr", output?.get("name"), "map not equal");
-      assert.equal("HashBuiltin", output?.get("type"), "map not equal");
+      const targetOutput = {name: "pedersen_ptr", type: "HashBuiltin", desc: ""};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -193,9 +190,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-
-      assert.equal("range_check_ptr", output?.get("name"), "map not equal");
-      assert.equal("", output?.get("type"), "map not equal");
+      const targetOutput = {"name": "range_check_ptr", "type": "", desc: ""};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -278,13 +274,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("name", output?.get("name"), "name not equal");
-      assert.equal("felt", output?.get("type"), "type not equal");
-      assert.equal(
-        "the address of the ERC20 sender",
-        output?.get("desc"),
-        "desc not equal"
-      );
+      const targetOutput = {name: "name", type: "felt", desc: "the address of the ERC20 sender"};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -308,13 +299,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("symbol", output?.get("name"), "name not equal");
-      assert.equal("felt", output?.get("type"), "type not equal");
-      assert.equal(
-        "the address of the ERC20 recipient",
-        output?.get("desc"),
-        "desc not equal"
-      );
+      const targetOutput = {name: "symbol", type: "felt", desc: "the address of the ERC20 recipient"};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -338,13 +324,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("decimals", output?.get("name"), "name not equal");
-      assert.equal("uint256", output?.get("type"), "type not equal");
-      assert.equal(
-        "floating point of the token",
-        output?.get("desc"),
-        "desc not equal"
-      );
+      const targetOutput = {name: "decimals", type: "uint256", desc: "floating point of the token"};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -367,13 +348,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("initial_supply", output?.get("name"), "name not equal");
-      assert.equal("uint256", output?.get("type"), "type not equal");
-      assert.equal(
-        "amount of ERC20 transfer",
-        output?.get("desc"),
-        "desc not equal"
-      );
+      const targetOutput = {name: "initial_supply", type: "uint256", desc: "amount of ERC20 transfer"};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -397,13 +373,8 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal("recipient", output?.get("name"), "name not equal");
-      assert.equal("felt", output?.get("type"), "type not equal");
-      assert.equal(
-        "amount of ERC20 transfer",
-        output?.get("desc"),
-        "desc not equal"
-      );
+      const targetOutput = {name: "recipient", type: "felt", desc: "amount of ERC20 transfer"};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
 
     {
@@ -479,11 +450,9 @@ suite("function-comment: constructor", () => {
         isEndScope,
         `failed to get desc comment line ${line}`
       );
-      assert.equal(
-        "None",
-        output?.get("desc"),
-        `failed to get desc comment line ${line}`
-      );
+
+      const targetOutput = {name: "", type: "", desc: "None"};
+      assert.deepEqual(targetOutput, output, `failed to get desc comment line ${line}`);
     }
   });
 });

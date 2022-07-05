@@ -15,7 +15,7 @@ export default class FunctionCommentDescParser extends BaseCommentParser {
     return false;
   }
 
-  returnOutput(line: string): FunctionComment | null {
+  parseCommentLine(line: string): FunctionComment | null {
     if (this.isInsideScope(line)) {
       const match = line.match(/#\s+(.+)/);
       if (match) {

@@ -14,7 +14,7 @@ export abstract class BaseCommentParser {
     return false;
   }
 
-  returnOutput(line: string): FunctionComment | null {
+  parseCommentLine(line: string): FunctionComment | null {
     throw new Error("NOT IMPLEMENTED!");
   }
 

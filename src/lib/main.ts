@@ -64,7 +64,7 @@ export default class CairoParser {
   //       const commentResult = new Map<string, string>
   //       if (commentLines) {
   //         for (const commentLine of commentLines) {
-  //           const commentOutput = commentParser.returnOutput(commentLine);
+  //           const commentOutput = commentParser.parseCommentLine(commentLine);
   //           if (commentOutput) {
 
   //           }

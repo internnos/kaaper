@@ -20,9 +20,13 @@ export default class FunctionCommentExplicitArgsParser extends BaseCommentParser
       const matchCommentLines = line.match(/#\s+(.+)/);
 
       if (matchCommentLines) {
-        const matchInterface = line.match(/(\w+)(\((\w+)\)):(.*)/)
+        const matchInterface = line.match(/(\w+)(\((\w+)\)):(.*)/);
         if (matchInterface) {
-          return {"name": matchInterface[1], "type": matchInterface[3], "desc": matchInterface[4].trim()};
+          return {
+            name: matchInterface[1],
+            type: matchInterface[3],
+            desc: matchInterface[4].trim(),
+          };
         }
       }
     }

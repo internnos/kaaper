@@ -21,11 +21,15 @@ export default class FunctionCommentReturnsParser extends BaseCommentParser {
 
       if (matchCommentLines) {
         if (matchCommentLines[1] === "None") {
-          return {"name": "", "type": "", "desc": "None"};
+          return { name: "", type: "", desc: "None" };
         }
-        const matchInterface = line.match(/(\w+)(\(\w+\)):(.*)/)
+        const matchInterface = line.match(/(\w+)(\(\w+\)):(.*)/);
         if (matchInterface) {
-          return {"name": matchInterface[1], "type": matchInterface[2], "desc": matchInterface[3]};
+          return {
+            name: matchInterface[1],
+            type: matchInterface[2],
+            desc: matchInterface[3],
+          };
         }
       }
     }

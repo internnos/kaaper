@@ -19,13 +19,16 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
     if (this.isInsideScope(line)) {
       const matchCommentLines = line.match(/#\s+(.+)/);
       if (matchCommentLines) {
-        const matchInterface = line.match(/#\s+(\w+)(\(?([\w\*]+)\))?$/)
+        const matchInterface = line.match(/#\s+(\w+)(\(?([\w\*]+)\))?$/);
         if (matchInterface) {
-          if (matchInterface[3]){
-            return {"name": matchInterface[1], "type": matchInterface[3], "desc": ""};
-
+          if (matchInterface[3]) {
+            return {
+              name: matchInterface[1],
+              type: matchInterface[3],
+              desc: "",
+            };
           }
-          return {"name": matchInterface[1], "type": "", "desc": ""};
+          return { name: matchInterface[1], type: "", desc: "" };
         }
       }
     }

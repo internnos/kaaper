@@ -1,5 +1,3 @@
-
-
 export abstract class BaseFunctionSignatureParser {
   constructor() {}
 
@@ -11,13 +9,12 @@ export abstract class BaseFunctionSignatureParser {
     mappingResult.forEach((element) => {
       const [key, value] = element.split(":");
       try {
-        const map = {name: key.trim(), type: value.trim()};
+        const map = { name: key.trim(), type: value.trim() };
         outputResult.push(map);
       } catch (e: any) {
-        const map = {name: key.trim(), type: ""};
+        const map = { name: key.trim(), type: "" };
         outputResult.push(map);
       }
-      
     }, this);
     return outputResult;
   }

@@ -52,8 +52,12 @@ suite("function-signature: constructor", () => {
       { name: "syscall_ptr", type: "felt*" },
       { name: "pedersen_ptr", type: "HashBuiltin*" },
       { name: "range_check_ptr", type: "" },
-    ]
-    assert.deepEqual(targetImplicitArgs, implicitArgs, "failed to get implicit args");
+    ];
+    assert.deepEqual(
+      targetImplicitArgs,
+      implicitArgs,
+      "failed to get implicit args"
+    );
   });
 
   test("get explicit args", () => {
@@ -75,8 +79,11 @@ suite("function-signature: constructor", () => {
       { name: "decimals", type: "Uint256" },
       { name: "initial_supply", type: "Uint256" },
       { name: "recipient", type: "felt" },
-    ]
-    assert.deepEqual(targetExplicitArgs, explicitArgs, "failed to get explicit args");
+    ];
+    assert.deepEqual(
+      targetExplicitArgs,
+      explicitArgs,
+      "failed to get explicit args"
+    );
   });
-
 });

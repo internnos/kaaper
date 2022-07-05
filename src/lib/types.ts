@@ -1,10 +1,10 @@
 interface FunctionSignature {
-    name: string;
-    type: string;
+  name: string;
+  type: string;
 }
 
-interface FunctionComment{
-    name: string;
-    type: string;
-    desc: string;
+interface FunctionComment {
+  name: string;
+  type: string;
+  desc: string;
 }

@@ -12,7 +12,10 @@ suite("function-comment: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
     const commentText = CairoParser.parseCommentLines(functionText);
     const descParser = new FunctionCommentDescParser();
 
@@ -90,8 +93,11 @@ suite("function-comment: constructor", () => {
       __dirname,
       "../../../../test_assets/ERC20.cairo"
     );
-    const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
-    
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+
     const commentText = CairoParser.parseCommentLines(functionText);
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
 
@@ -219,8 +225,11 @@ suite("function-comment: constructor", () => {
       "../../../../test_assets/ERC20.cairo"
     );
 
-    const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
-    
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+
     const commentText = CairoParser.parseCommentLines(functionText);
     const explicitArgsParser = new FunctionCommentExplicitArgsParser();
 
@@ -271,7 +280,6 @@ suite("function-comment: constructor", () => {
       );
       assert.equal("name", output?.get("name"), "name not equal");
       assert.equal("felt", output?.get("type"), "type not equal");
-      console.log(output?.get("desc"));
       assert.equal(
         "the address of the ERC20 sender",
         output?.get("desc"),
@@ -424,8 +432,11 @@ suite("function-comment: constructor", () => {
       "../../../../test_assets/ERC20.cairo"
     );
 
-    const functionText = CairoParser.parseFunctionScope(pathFile, "constructor")
-    
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+
     const commentText = CairoParser.parseCommentLines(functionText);
     const returnsParser = new FunctionCommentReturnsParser();
 

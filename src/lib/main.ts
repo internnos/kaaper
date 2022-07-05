@@ -9,22 +9,21 @@ import FunctionCommentExplicitArgsParser from "./parser/function-comment/explici
 let map = new Map();
 map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#]+\s/gm);
 
-
 export default class CairoParser {
   // public supportedComments: Map<string, BaseCommentParser>;
   public supportedScopes: Array<string>;
   public supportedComments: Array<BaseCommentParser>;
-  
+
   constructor() {
-    this.supportedScopes = ["constructor"]
-    this.supportedComments = [new FunctionCommentDescParser]
+    this.supportedScopes = ["constructor"];
+    this.supportedComments = [new FunctionCommentDescParser()];
   }
   static getRegex(name: string): RegExp {
     return map.get(name);
   }
 
   static parseFunctionScope(filePath: string, name: string): string {
-  const text = fs.readFileSync(filePath, "utf8");
+    const text = fs.readFileSync(filePath, "utf8");
     const result = text.match(this.getRegex(name));
     if (result) {
       return result[0];
@@ -38,7 +37,7 @@ export default class CairoParser {
   }
 
   // static parse
- 
+
   // parseWholeScope(filePath: string): Map<string, string> {
   //   for (const supportedScope of this.supportedScopes){
   //     // parse the whole scope
@@ -68,14 +67,12 @@ export default class CairoParser {
   //           const commentOutput = commentParser.returnOutput(commentLine);
   //           if (commentOutput) {
 
-              
   //           }
   //         }
 
   //       }
   //     }
   //   }
-
 
   //   // for (supportedScope) this.supportedScopes) {
   //   //   const scope = CairoParser.parseFunctionScope(filePath, supportedScope);

@@ -5,18 +5,8 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
     super();
   }
 
-  isStartScope(line: string): boolean {
-    const result = line.match(/#\s?(\w+\s?\w+)/);
-    if (result) {
-      if (result[1] === "Implicit args") {
-        return true;
-      }
-    }
-    return false;
-  }
-
   parseCommentLine(line: string): FunctionComment | null {
-    if (this.isInsideScope(line)) {
+    if (this.runningScope === true) {
       const matchCommentLines = line.match(/#\s+(.+)/);
       if (matchCommentLines) {
         const matchInterface = line.match(/#\s+(\w+)(\(?([\w\*]+)\))?$/);
@@ -33,15 +23,5 @@ export default class FunctionCommentImplicitArgsParser extends BaseCommentParser
       }
     }
     return null;
-  }
-
-  isEndScope(line: string): boolean {
-    const result = line.match(/#\s?(\w+\s?\w+)/);
-    if (result) {
-      if (result[1] !== "Implicit args") {
-        return true;
-      }
-    }
-    return false;
   }
 }

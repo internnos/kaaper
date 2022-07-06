@@ -3,20 +3,11 @@ import { BaseCommentParser } from "../interfaces/function-comment";
 export default class FunctionCommentExplicitArgsParser extends BaseCommentParser {
   constructor() {
     super();
-  }
-
-  isStartScope(line: string): boolean {
-    const result = line.match(/#\s?(\w+\s?\w+)/);
-    if (result) {
-      if (result[1] === "Explicit args") {
-        return true;
-      }
-    }
-    return false;
+    this.name = "Explicit args";
   }
 
   parseCommentLine(line: string): FunctionComment | null {
-    if (this.isInsideScope(line)) {
+    if (this.runningScope === true) {
       const matchCommentLines = line.match(/#\s+(.+)/);
 
       if (matchCommentLines) {
@@ -31,15 +22,5 @@ export default class FunctionCommentExplicitArgsParser extends BaseCommentParser
       }
     }
     return null;
-  }
-
-  isEndScope(line: string): boolean {
-    const result = line.match(/#\s?(\w+\s?\w+)/);
-    if (result) {
-      if (result[1] !== "Explicit args") {
-        return true;
-      }
-    }
-    return false;
   }
 }

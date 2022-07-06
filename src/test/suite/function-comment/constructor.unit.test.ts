@@ -40,39 +40,39 @@ suite("function-comment: constructor", () => {
       assert.equal(null, output, `failed to get desc comment line ${line}`);
     }
 
-    // {
-    //   const line = 1;
-    //   assert.equal(
-    //     "#   Initialize the contract",
-    //     commentText![line].trim(),
-    //     `check line ${line}`
-    //   );
-    //   descParser.setStartScope(commentText![line]);
-    //   const isEndScope = descParser.isEndScope(commentText![line]);
-    //   const output = descParser.parseCommentLine(commentText![line]);
+    {
+      const line = 1;
+      assert.equal(
+        "#   Initialize the contract",
+        commentText![line].trim(),
+        `check line ${line}`
+      );
+      descParser.setStartScope(commentText![line]);
+      const isEndScope = descParser.isEndScope(commentText![line]);
+      const output = descParser.parseCommentLine(commentText![line]);
 
-    //   // assert.equal(
-    //   //   false,
-    //   //   descParser.runningScope,
-    //   //   `failed to get desc comment line ${line}`
-    //   // );
-    //   assert.equal(
-    //     false,
-    //     isEndScope,
-    //     `failed to get desc comment line ${line}`
-    //   );
+      assert.equal(
+        true,
+        descParser.runningScope,
+        `failed to get desc comment line ${line}`
+      );
+      assert.equal(
+        false,
+        isEndScope,
+        `failed to get desc comment line ${line}`
+      );
 
-    //   const targetOutput = {
-    //     name: "",
-    //     type: "",
-    //     desc: "Initialize the contract",
-    //   };
-    //   assert.deepEqual(
-    //     targetOutput,
-    //     output,
-    //     `failed to get desc comment line ${line}`
-    //   );
-    // }
+      const targetOutput = {
+        name: "",
+        type: "",
+        desc: "Initialize the contract",
+      };
+      assert.deepEqual(
+        targetOutput,
+        output,
+        `failed to get desc comment line ${line}`
+      );
+    }
 
     // {
     //   const line = 2;

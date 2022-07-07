@@ -40,31 +40,30 @@ suite("function-comment: constructor: explicit-args", () => {
   });
 
 
-  // test("parse line 3", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../test_assets/ERC20.cairo"
-  //   );
-  //   const functionText = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "constructor"
-  //   );
-  //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser();
-  //   explicitArgsParser.setStartScope(commentText![2]);
+  test("parse line 7", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser();
+    explicitArgsParser.setStartScope(commentText![6]);
 
-  //   const line = 3;
-  //   assert.equal("#   syscall_ptr(felt*)", commentText![line].trim(), `check line ${line}`);
-  //   assert.notEqual(commentText![line], explicitArgsParser.startLine);
+    const line = 7;
+    assert.equal("#   name(felt): the address of the ERC20 sender", commentText![line].trim(), `check line ${line}`);
+    assert.notEqual(commentText![line], explicitArgsParser.startLine);
 
-  //   assert.equal(true, explicitArgsParser.runningScope, `failed to get running scope line ${line}`);
-  //   const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
+    assert.equal(true, explicitArgsParser.runningScope, `failed to get running scope line ${line}`);
+    const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
     
-  //   const targetLineParsing = {name: "syscall_ptr", type: "felt*", desc: ""};
-  //   assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
-
-  //   assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
-  // })
+    const targetLineParsing = {name: "name", type: "felt", desc: "the address of the ERC20 sender"};
+    assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
+    assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+  })
 
   // test("parse line 4", () => {
   //   const pathFile = path.resolve(

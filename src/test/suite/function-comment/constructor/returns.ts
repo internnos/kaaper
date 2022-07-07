@@ -51,7 +51,7 @@ suite("function-comment: constructor: returns", () => {
     );
     const commentText = CairoParser.parseCommentLines(functionText);
     const returnsParser = new FunctionCommentReturnsParser();
-    returnsParser.setStartScope(commentText![6]);
+    returnsParser.setStartScope(commentText![12]);
 
     const line = 13;
     assert.equal("#   None", commentText![line].trim(), `check line ${line}`);
@@ -77,7 +77,7 @@ suite("function-comment: constructor: returns", () => {
     );
     const commentText = CairoParser.parseCommentLines(functionText);
     const returnsParser = new FunctionCommentReturnsParser();
-    returnsParser.setStartScope(commentText![6]);
+    returnsParser.setStartScope(commentText![12]);
 
     const line = 14;
     assert.equal("# Raises:", commentText![line].trim(), `check line ${line}`);

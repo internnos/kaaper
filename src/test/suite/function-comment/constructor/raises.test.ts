@@ -40,31 +40,32 @@ suite("function-comment: constructor: raises", () => {
   });
 
 
-  // test("parse line 13", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../test_assets/ERC20.cairo"
-  //   );
-  //   const functionText = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "constructor"
-  //   );
-  //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const raisesParser = new FunctionCommentRaisesParser();
-  //   raisesParser.setStartScope(commentText![6]);
+  test("parse line 15", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const raisesParser = new FunctionCommentRaisesParser();
+    raisesParser.setStartScope(commentText![14]);
+    // console.log(commentText![15]);
 
-  //   const line = 13;
-  //   assert.equal("#   None", commentText![line].trim(), `check line ${line}`);
-  //   assert.notEqual(commentText![line], raisesParser.startLine);
-  //   const isEndScope = raisesParser.isEndScope(commentText![line]);
-  //   assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
+    const line = 15;
+    assert.equal("#   decimals: decimals exceed 2^8", commentText![line].trim(), `check line ${line}`);
+    assert.notEqual(commentText![line], raisesParser.startLine);
+    const isEndScope = raisesParser.isEndScope(commentText![line]);
+    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
-  //   assert.equal(true, raisesParser.runningScope, `failed to get running scope line ${line}`);
-  //   const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
+    assert.equal(true, raisesParser.runningScope, `failed to get running scope line ${line}`);
+    const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
     
-  //   const targetLineParsing = {name: "", type: "", desc: "None"};
-  //   assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
-  // })
+    const targetLineParsing = {name: "decimals", type: "", desc: "decimals exceed 2^8"};
+    assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
+  })
 
   // test("parse line 14", () => {
   //   const pathFile = path.resolve(

@@ -7,7 +7,7 @@ import FunctionCommentExplicitArgsParser from "./parser/function-comment/explici
 
 // TODO: refactor this
 let map = new Map();
-map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#]+\s/gm);
+map.set("constructor", /@constructor\s[\w\s\{\}\:\*\,\(\)\#\->\#\^]+\s/gm);
 
 export default class CairoParser {
   // public supportedComments: Map<string, BaseCommentParser>;

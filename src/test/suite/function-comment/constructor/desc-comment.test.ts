@@ -47,9 +47,7 @@ suite("function-comment: constructor: desc", () => {
       "constructor"
     );
     const commentText = CairoParser.parseCommentLines(functionText);
-
     const descParser = new FunctionCommentDescParser();
-
     descParser.setStartScope(commentText![0]);
 
     const line = 1;
@@ -68,6 +66,9 @@ suite("function-comment: constructor: desc", () => {
       `failed to get running scope line ${line}`
     );
 
+    const isEndScope = descParser.isEndScope(commentText![line]);
+    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
+
     const resultLineParsing = descParser.parseCommentLine(commentText![line]);
 
     const targetLineParsing = {
@@ -80,7 +81,47 @@ suite("function-comment: constructor: desc", () => {
       resultLineParsing,
       `failed to get resultLineParsing line ${line}`
     );
+  });
+
+  test("start-scope line 2", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const descParser = new FunctionCommentDescParser();
+    descParser.setStartScope(commentText![0]);
+
+    const line = 2;
+    assert.equal(
+      "# Implicit args:",
+      commentText![line].trim(),
+      `check line ${line}`
+    );
+
+    assert.equal("# Desc:", descParser.startLine);
+    assert.notEqual(line, descParser.startLine);
     const isEndScope = descParser.isEndScope(commentText![line]);
-    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
+    assert.equal(true, isEndScope, `failed to get end scope line ${line}`);
+
+    descParser.setEndScope(commentText![line]);
+
+    assert.equal(
+      false,
+      descParser.runningScope,
+      `failed to get running scope line ${line}`
+    );
+
+    const resultLineParsing = descParser.parseCommentLine(commentText![line]);
+
+    assert.deepEqual(
+      null,
+      resultLineParsing,
+      `failed to get resultLineParsing line ${line}`
+    );
   });
 });

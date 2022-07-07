@@ -15,18 +15,18 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const commentText = CairoParser.parseCommentLines(functionText);
 
-    const descParser = new FunctionCommentImplicitArgsParser();
+    const implicitArgsParser = new FunctionCommentImplicitArgsParser();
 
     const line = 2;
     assert.equal("# Implicit args:", commentText![line].trim(), `check line ${line}`);
-    descParser.setStartScope(commentText![line]);
+    implicitArgsParser.setStartScope(commentText![line]);
 
-    const resultLineParsing = descParser.parseCommentLine(commentText![line]);
-    const isEndScope = descParser.isEndScope(commentText![line]);
+    const resultLineParsing = implicitArgsParser.parseCommentLine(commentText![line]);
+    const isEndScope = implicitArgsParser.isEndScope(commentText![line]);
 
     assert.equal(
       true,
-      descParser.runningScope,
+      implicitArgsParser.runningScope,
       `failed to get running scope line ${line}`
     );
     assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
@@ -36,6 +36,7 @@ suite("function-comment: constructor: implicit-args", () => {
       `failed to get resultLineParsing line ${line}`
     );
   });
+
 
   // test("parse line 1", () => {
   //   const pathFile = path.resolve(
@@ -47,8 +48,8 @@ suite("function-comment: constructor: implicit-args", () => {
   //     "constructor"
   //   );
   //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const descParser = new FunctionCommentDescParser();
-  //   descParser.setStartScope(commentText![0]);
+  //   const implicitArgsParser = new FunctionCommentimplicitArgsParser();
+  //   implicitArgsParser.setStartScope(commentText![0]);
 
   //   const line = 1;
   //   assert.equal(
@@ -57,19 +58,19 @@ suite("function-comment: constructor: implicit-args", () => {
   //     `check line ${line}`
   //   );
 
-  //   assert.equal("# Desc:", descParser.startLine);
-  //   assert.notEqual(line, descParser.startLine);
+  //   assert.equal("# Desc:", implicitArgsParser.startLine);
+  //   assert.notEqual(line, implicitArgsParser.startLine);
 
   //   assert.equal(
   //     true,
-  //     descParser.runningScope,
+  //     implicitArgsParser.runningScope,
   //     `failed to get running scope line ${line}`
   //   );
 
-  //   const isEndScope = descParser.isEndScope(commentText![line]);
+  //   const isEndScope = implicitArgsParser.isEndScope(commentText![line]);
   //   assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
-  //   const resultLineParsing = descParser.parseCommentLine(commentText![line]);
+  //   const resultLineParsing = implicitArgsParser.parseCommentLine(commentText![line]);
 
   //   const targetLineParsing = {
   //     name: "",
@@ -93,8 +94,8 @@ suite("function-comment: constructor: implicit-args", () => {
   //     "constructor"
   //   );
   //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const descParser = new FunctionCommentDescParser();
-  //   descParser.setStartScope(commentText![0]);
+  //   const implicitArgsParser = new FunctionCommentimplicitArgsParser();
+  //   implicitArgsParser.setStartScope(commentText![0]);
 
   //   const line = 2;
   //   assert.equal(
@@ -103,20 +104,20 @@ suite("function-comment: constructor: implicit-args", () => {
   //     `check line ${line}`
   //   );
 
-  //   assert.equal("# Desc:", descParser.startLine);
-  //   assert.notEqual(line, descParser.startLine);
-  //   const isEndScope = descParser.isEndScope(commentText![line]);
+  //   assert.equal("# Desc:", implicitArgsParser.startLine);
+  //   assert.notEqual(line, implicitArgsParser.startLine);
+  //   const isEndScope = implicitArgsParser.isEndScope(commentText![line]);
   //   assert.equal(true, isEndScope, `failed to get end scope line ${line}`);
 
-  //   descParser.setEndScope(commentText![line]);
+  //   implicitArgsParser.setEndScope(commentText![line]);
 
   //   assert.equal(
   //     false,
-  //     descParser.runningScope,
+  //     implicitArgsParser.runningScope,
   //     `failed to get running scope line ${line}`
   //   );
 
-  //   const resultLineParsing = descParser.parseCommentLine(commentText![line]);
+  //   const resultLineParsing = implicitArgsParser.parseCommentLine(commentText![line]);
 
   //   assert.deepEqual(
   //     null,
@@ -136,9 +137,9 @@ suite("function-comment: constructor: implicit-args", () => {
   //   );
   //   const commentText = CairoParser.parseCommentLines(functionText);
 
-  //   const descParser = new FunctionCommentDescParser();
+  //   const implicitArgsParser = new FunctionCommentimplicitArgsParser();
 
-  //   const resultLineParsing = descParser.parseCommentLines(commentText!);
+  //   const resultLineParsing = implicitArgsParser.parseCommentLines(commentText!);
 
   //   const targetLineParsing = [{name: "", type: "", desc: "Initialize the contract"}];
     

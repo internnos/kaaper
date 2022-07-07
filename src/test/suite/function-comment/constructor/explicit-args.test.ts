@@ -24,14 +24,13 @@ suite("function-comment: constructor: explicit-args", () => {
     assert.equal(commentText![line], explicitArgsParser.startLine);
 
     const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
-    const isEndScope = explicitArgsParser.isEndScope(commentText![line]);
 
     assert.equal(
       true,
       explicitArgsParser.runningScope,
       `failed to get running scope line ${line}`
     );
-    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
+    assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
     assert.equal(
       null,
       resultLineParsing,
@@ -83,43 +82,43 @@ suite("function-comment: constructor: explicit-args", () => {
     const line = 8;
     assert.equal("#   symbol(felt): the address of the ERC20 recipient", commentText![line].trim(), `check line ${line}`);
     assert.notEqual(commentText![line], explicitArgsParser.startLine);
+    assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
 
     assert.equal(true, explicitArgsParser.runningScope, `failed to get running scope line ${line}`);
     const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
     
     const targetLineParsing = {name: "symbol", type: "felt", desc: "the address of the ERC20 recipient"};
     assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
-    assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+    
   })
 
   
 
-  // test("parse line 5", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../test_assets/ERC20.cairo"
-  //   );
-  //   const functionText = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "constructor"
-  //   );
-  //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser();
-  //   explicitArgsParser.setStartScope(commentText![2]);
+  test("parse line 9", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser();
+    explicitArgsParser.setStartScope(commentText![6]);
 
-  //   const line = 5;
-  //   assert.equal("#   range_check_ptr", commentText![line].trim(), `check line ${line}`);
-  //   assert.notEqual(commentText![line], explicitArgsParser.startLine);
-  //   assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+    const line = 9;
+    assert.equal("#   decimals(Uint256): floating point of the token", commentText![line].trim(), `check line ${line}`);
+    assert.notEqual(commentText![line], explicitArgsParser.startLine);
+    assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
 
-  //   assert.equal(true, explicitArgsParser.runningScope, `failed to get running scope line ${line}`);
-  //   const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
+
+    assert.equal(true, explicitArgsParser.runningScope, `failed to get running scope line ${line}`);
+    const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
     
-  //   const targetLineParsing = {name: "range_check_ptr", type: "", desc: ""};
-  //   assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
-
-  //   assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
-  // })
+    const targetLineParsing = {name: "decimals", type: "Uint256", desc: "floating point of the token"};
+    assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
+  })
 
   // test("parse line 6", () => {
   //   const pathFile = path.resolve(

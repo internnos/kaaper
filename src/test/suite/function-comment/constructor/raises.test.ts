@@ -92,6 +92,32 @@ suite("function-comment: constructor: raises", () => {
     assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
   })
 
+  test("parse line 17", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const raisesParser = new FunctionCommentRaisesParser();
+    raisesParser.setStartScope(commentText![14]);
+
+    const line = 17;
+    assert.equal("#   initial_supply: not valid Uint256", commentText![line].trim(), `check line ${line}`);
+    assert.notEqual(commentText![line], raisesParser.startLine);
+    const isEndScope = raisesParser.isEndScope(commentText![line]);
+    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
+
+    assert.equal(true, raisesParser.runningScope, `failed to get running scope line ${line}`);
+    const resultLineParsing = raisesParser.parseCommentLine(commentText![line]);
+    
+    const targetLineParsing = {name: "initial_supply", type: "", desc: "not valid Uint256"};
+    assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
+  })
+
 
   // test("parse whole scope", () => {
   //   const pathFile = path.resolve(

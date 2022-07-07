@@ -145,24 +145,27 @@ suite("function-comment: constructor: raises", () => {
   })
 
 
-  // test("parse whole scope", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../test_assets/ERC20.cairo"
-  //   );
-  //   const functionText = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "constructor"
-  //   );
-  //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const raisesParser = new FunctionCommentRaisesParser();
+  test("parse whole scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const raisesParser = new FunctionCommentRaisesParser();
 
-  //   const targetLineParsing = [
-  //     {name: "", type: "", desc: "None"},
-  //   ]
-  //   const resultLineParsing = raisesParser.parseCommentLines(commentText!);
+    const targetLineParsing = [
+      {name: "decimals", type: "", desc: "decimals exceed 2^8"},
+      {name: "recipient", type: "", desc: "cannot mint to the zero address"},
+      {name: "initial_supply", type: "", desc: "not valid Uint256"},
+      {name: "initial_supply", type: "", desc: "mint overflow"}
+    ]
+    const resultLineParsing = raisesParser.parseCommentLines(commentText!);
     
-  //   assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing on whole scope`);
-  // })
+    assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing on whole scope`);
+  })
 
 });

@@ -120,34 +120,31 @@ suite("function-comment: constructor: explicit-args", () => {
     assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
   })
 
-  // test("parse line 6", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../test_assets/ERC20.cairo"
-  //   );
-  //   const functionText = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "constructor"
-  //   );
-  //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser();
-  //   explicitArgsParser.setStartScope(commentText![2]);
+  test("parse line 10", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser();
+    explicitArgsParser.setStartScope(commentText![6]);
 
-  //   const line = 6;
-  //   assert.equal(false, explicitArgsParser.isStartScope(commentText![line]), `check line ${line}`);
-  //   assert.equal(true, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+    const line = 10;
+    assert.equal("#   initial_supply(Uint256): amount of ERC20 transfer", commentText![line].trim(), `check line ${line}`);
+    assert.notEqual(commentText![line], explicitArgsParser.startLine);
+    assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
 
-  //   assert.equal("# Explicit args:", commentText![line].trim(), `check line ${line}`);
-  //   assert.notEqual(commentText![line], explicitArgsParser.startLine);
-
-  //   explicitArgsParser.setEndScope(commentText![line]);
-
-  //   assert.equal(false, explicitArgsParser.runningScope, `failed to get running scope line ${line}`);
-  //   const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
+    assert.equal(true, explicitArgsParser.runningScope, `failed to get running scope line ${line}`);
+    const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
     
-    
-  //   assert.deepEqual(null, resultLineParsing, `failed to get resultLineParsing line ${line}`);
-  // })
+    const targetLineParsing = {name: "initial_supply", type: "Uint256", desc: "amount of ERC20 transfer"};
+    assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
+  })
+
 
   // test("parse whole scope", () => {
   //   const pathFile = path.resolve(

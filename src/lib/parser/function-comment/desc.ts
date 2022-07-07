@@ -8,10 +8,10 @@ export default class FunctionCommentDescParser extends BaseCommentParser {
 
   parseCommentLine(line: string): FunctionComment | null {
     if (this.runningScope === true && this.startLine !== line) {
-      const match = line.match(/#\s+(.+)/);
-      if (match) {
-        const response = { name: "", type: "", desc: match[1] };
-        return response;
+      const matchCommentLines = line.match(/#\s+(.+)/);
+      if (matchCommentLines) {
+        const matchInterface = { name: "", type: "", desc: matchCommentLines[1] };
+        return matchInterface;
       }
     }
     return null;

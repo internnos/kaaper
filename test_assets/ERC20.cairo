@@ -20,11 +20,11 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     #   pedersen_ptr(HashBuiltin)
     #   range_check_ptr
     # Explicit args:
-    #   name(felt): the address of the ERC20 sender
-    #   symbol(felt): the address of the ERC20 recipient
+    #   name(felt): name of the token
+    #   symbol(felt): symbol of the token
     #   decimals(Uint256): floating point of the token
-    #   initial_supply(Uint256): amount of ERC20 transfer
-    #   recipient(felt): amount of ERC20 transfer
+    #   initial_supply(Uint256): amount of initial supply of the token
+    #   recipient(felt): the address of recipient of the initial supply
     # Returns:
     #   None
     ERC20.constructor(name, symbol, decimals)

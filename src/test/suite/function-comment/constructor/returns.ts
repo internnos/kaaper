@@ -66,34 +66,32 @@ suite("function-comment: constructor: returns", () => {
     assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
   })
 
+  test("parse line 14", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const returnsParser = new FunctionCommentReturnsParser();
+    returnsParser.setStartScope(commentText![6]);
 
-  // test("parse line 8", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../test_assets/ERC20.cairo"
-  //   );
-  //   const functionText = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "constructor"
-  //   );
-  //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const returnsParser = new FunctionCommentReturnsParser();
-  //   returnsParser.setStartScope(commentText![6]);
+    const line = 14;
+    assert.equal("# Raises:", commentText![line].trim(), `check line ${line}`);
+    assert.notEqual(commentText![line], returnsParser.startLine);
+    assert.equal(true, returnsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+    returnsParser.setEndScope(commentText![line]);
 
-  //   const line = 8;
-  //   assert.equal("#   symbol(felt): symbol of the token", commentText![line].trim(), `check line ${line}`);
-  //   assert.notEqual(commentText![line], returnsParser.startLine);
-  //   assert.equal(false, returnsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
-
-  //   assert.equal(true, returnsParser.runningScope, `failed to get running scope line ${line}`);
-  //   const resultLineParsing = returnsParser.parseCommentLine(commentText![line]);
+    assert.equal(false, returnsParser.runningScope, `failed to get running scope line ${line}`);
+    const resultLineParsing = returnsParser.parseCommentLine(commentText![line]);
     
-  //   const targetLineParsing = {name: "symbol", type: "felt", desc: "symbol of the token"};
-  //   assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
-    
-  // })
+    assert.deepEqual(null, resultLineParsing, `failed to get resultLineParsing line ${line}`);
+  })
 
-  
+
 
   // test("parse line 9", () => {
   //   const pathFile = path.resolve(

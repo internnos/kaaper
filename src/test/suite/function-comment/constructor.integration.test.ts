@@ -8,19 +8,19 @@ import FunctionCommentReturnsParser from "../../../lib/parser/function-comment/r
 
 suite("function-comment: constructor", () => {
   test("get desc comments", () => {
-    const pathFile = path.resolve(
-      __dirname,
-      "../../../../test_assets/ERC20.cairo"
-    );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
-    const commentText = CairoParser.parseCommentLines(functionText);
-    const descParser = new FunctionCommentDescParser();
+    // const pathFile = path.resolve(
+    //   __dirname,
+    //   "../../../../test_assets/ERC20.cairo"
+    // );
+    // const functionText = CairoParser.parseFunctionScope(
+    //   pathFile,
+    //   "constructor"
+    // );
+    // const commentText = CairoParser.parseCommentLines(functionText);
+    // const descParser = new FunctionCommentDescParser();
 
-    const desc = descParser.parseCommentLines(commentText!);
-    const targetDesc = [{name: "", "type": "", desc: "Initialize the contract"}]
+    // const desc = descParser.parseCommentLines(commentText!);
+    // const targetDesc = [{name: "", "type": "", desc: "Initialize the contract"}]
     // assert.deepEqual(targetDesc, desc, "failed to get desc");
   });
 

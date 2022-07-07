@@ -56,13 +56,15 @@ suite("function-comment: constructor: explicit-args", () => {
     const line = 7;
     assert.equal("#   name(felt): the address of the ERC20 sender", commentText![line].trim(), `check line ${line}`);
     assert.notEqual(commentText![line], explicitArgsParser.startLine);
+    const isEndScope = explicitArgsParser.isEndScope(commentText![line]);
+    assert.equal(false, isEndScope, `failed to get end scope line ${line}`);
 
     assert.equal(true, explicitArgsParser.runningScope, `failed to get running scope line ${line}`);
     const resultLineParsing = explicitArgsParser.parseCommentLine(commentText![line]);
     
     const targetLineParsing = {name: "name", type: "felt", desc: "the address of the ERC20 sender"};
     assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
-    assert.equal(false, explicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+    
   })
 
   test("parse line 8", () => {

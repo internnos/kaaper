@@ -4,7 +4,7 @@ import FunctionCommentDescParser from "../../../../lib/parser/function-comment/d
 import CairoParser from "../../../../lib/main";
 
 suite("function-comment: constructor: desc", () => {
-  test("start-scope line 0", () => {
+  test("parse line 0", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../../test_assets/ERC20.cairo"
@@ -37,7 +37,7 @@ suite("function-comment: constructor: desc", () => {
     );
   });
 
-  test("start-scope line 1", () => {
+  test("parse line 1", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../../test_assets/ERC20.cairo"
@@ -83,7 +83,7 @@ suite("function-comment: constructor: desc", () => {
     );
   });
 
-  test("start-scope line 2", () => {
+  test("parse line 2", () => {
     const pathFile = path.resolve(
       __dirname,
       "../../../../../test_assets/ERC20.cairo"

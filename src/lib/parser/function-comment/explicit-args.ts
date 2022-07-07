@@ -7,7 +7,7 @@ export default class FunctionCommentExplicitArgsParser extends BaseCommentParser
   }
 
   parseCommentLine(line: string): FunctionComment | null {
-    if (this.runningScope === true) {
+    if (this.runningScope === true && this.startLine !== line) {
       const matchCommentLines = line.match(/#\s+(.+)/);
 
       if (matchCommentLines) {

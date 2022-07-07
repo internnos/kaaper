@@ -19,7 +19,7 @@ suite("function-comment: constructor: returns", () => {
     const returnsParser = new FunctionCommentReturnsParser();
 
     const line = 12;
-    assert.equal("    # Returns:", commentText![line].trim(), `check line ${line}`);
+    assert.equal("# Returns:", commentText![line].trim(), `check line ${line}`);
     returnsParser.setStartScope(commentText![line]);
     
     assert.equal(commentText![line], returnsParser.startLine);

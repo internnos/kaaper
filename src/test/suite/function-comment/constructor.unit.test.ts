@@ -7,74 +7,90 @@ import FunctionCommentExplicitArgsParser from "../../../lib/parser/function-comm
 import FunctionCommentReturnsParser from "../../../lib/parser/function-comment/returns";
 
 suite("function-comment: constructor", () => {
-  test("get desc comments", () => {
-    const pathFile = path.resolve(
-      __dirname,
-      "../../../../test_assets/ERC20.cairo"
-    );
-    const functionText = CairoParser.parseFunctionScope(
-      pathFile,
-      "constructor"
-    );
-    const commentText = CairoParser.parseCommentLines(functionText);
-    const descParser = new FunctionCommentDescParser();
+  // test("get desc comments", () => {
+  //   const pathFile = path.resolve(
+  //     __dirname,
+  //     "../../../../test_assets/ERC20.cairo"
+  //   );
+  //   const functionText = CairoParser.parseFunctionScope(
+  //     pathFile,
+  //     "constructor"
+  //   );
+  //   const commentText = CairoParser.parseCommentLines(functionText);
+    
+    
+  //   {
+  //     const descParser = new FunctionCommentDescParser();
+  //     const line = 0;
+  //     assert.equal("# Desc:", commentText![line].trim(), `check line ${line}`);
+  //     descParser.setStartScope(commentText![line]);
+  //     const isEndScope = descParser.isEndScope(commentText![line]);
+  //     const output = descParser.parseCommentLine(commentText![line]);
+  //     assert.equal(
+  //       true,
+  //       descParser.runningScope,
+  //       `failed to get running scope line ${line}`
+  //     );
+  //     assert.equal(
+  //       false,
+  //       isEndScope,
+  //       `failed to get end scope line ${line}`
+  //     );
+  //     assert.equal(null, output, `failed to get parsing output line ${line}`);
+  //   }
 
-    {
-      const line = 0;
-      assert.equal("# Desc:", commentText![line].trim(), `check line ${line}`);
-      descParser.setStartScope(commentText![line]);
-      const isEndScope = descParser.isEndScope(commentText![line]);
-      const output = descParser.parseCommentLine(commentText![line]);
-      assert.equal(
-        true,
-        descParser.runningScope,
-        `failed to get desc comment line ${line}`
-      );
-      assert.equal(
-        false,
-        isEndScope,
-        `failed to get desc comment line ${line}`
-      );
-      console.log(output)
+  //   {
+  //     const descParser = new FunctionCommentDescParser();
+  //     const line = 1;
+  //     assert.equal(
+  //       "#   Initialize the contract",
+  //       commentText![line].trim(),
+  //       `check line ${line}`
+  //     );
 
-      assert.equal(null, output, `failed to get desc comment line ${line}`);
-    }
+  //     descParser.setStartScope(commentText![1]);
+  //     const isEndScope = descParser.isEndScope(commentText![line])
+      
+  //     ;
+      
+  //     {const output = descParser.parseCommentLine(commentText![line]);
 
-    {
-      const line = 1;
-      assert.equal(
-        "#   Initialize the contract",
-        commentText![line].trim(),
-        `check line ${line}`
-      );
-      descParser.setStartScope(commentText![line]);
-      const isEndScope = descParser.isEndScope(commentText![line]);
-      const output = descParser.parseCommentLine(commentText![line]);
+  //     assert.equal(
+  //       false,
+  //       descParser.runningScope,
+  //       `failed to get running scope line ${line}`
+  //     );
+  //     assert.equal(
+  //       false,
+  //       isEndScope,
+  //       `failed to get end scope line ${line}`
+  //     );
 
-      assert.equal(
-        true,
-        descParser.runningScope,
-        `failed to get desc comment line ${line}`
-      );
-      assert.equal(
-        false,
-        isEndScope,
-        `failed to get desc comment line ${line}`
-      );
+  //     assert.deepEqual(
+  //       null,
+  //       output,
+  //       `failed to get parsing output line ${line}`
+  //     );
+  //      }    
 
-      const targetOutput = {
-        name: "",
-        type: "",
-        desc: "Initialize the contract",
-      };
-      assert.deepEqual(
-        targetOutput,
-        output,
-        `failed to get desc comment line ${line}`
-      );
-    }
+    //   {
+      
+    //   const descParser = new FunctionCommentDescParser();
+    //   descParser.runningScope = true 
+    //   const output = descParser.parseCommentLine(commentText![line])
+    //   const targetOutput = {name: "", type: "", desc: "Initialize the contract"};
+    //   console.log(targetOutput)
+    //   assert.deepEqual(
+    //     targetOutput,
+    //     output,
+    //     `failed to get parsing output line ${line}`
+    //   );
+    // }
+
+    // }
 
     // {
+    //   const descParser = new FunctionCommentDescParser();
     //   const line = 2;
     //   assert.equal(
     //     "# Implicit args:",
@@ -89,10 +105,10 @@ suite("function-comment: constructor", () => {
     //     descParser.runningScope,
     //     `failed to get desc comment line ${line}`
     //   );
-    //   assert.equal(true, isEndScope, `failed to get desc comment line ${line}`);
+    //   assert.equal(false, isEndScope, `failed to get desc comment line ${line}`);
     //   assert.equal(null, output, `failed to get desc comment line ${line}`);
     // }
-  });
+  // });
 
   // test("get implicit args comments", () => {
   //   const pathFile = path.resolve(

@@ -134,7 +134,6 @@ suite("function-comment: constructor: implicit-args", () => {
     implicitArgsParser.setStartScope(commentText![2]);
 
     const line = 6;
-
     assert.equal(false, implicitArgsParser.isStartScope(commentText![line]), `check line ${line}`);
     assert.equal(true, implicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
 
@@ -161,8 +160,6 @@ suite("function-comment: constructor: implicit-args", () => {
     );
     const commentText = CairoParser.parseCommentLines(functionText);
     const implicitArgsParser = new FunctionCommentImplicitArgsParser();
-    // implicitArgsParser.setStartScope(commentText![2]);
-
     const targetLineParsing = [
       {name: "syscall_ptr", type: "felt*", desc: ""}, 
       {name: "pedersen_ptr", type: "HashBuiltin", desc: ""},

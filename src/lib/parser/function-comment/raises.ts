@@ -1,6 +1,6 @@
 import { BaseCommentParser } from "../interfaces/function-comment";
 
-export default class FunctionCommentReturnsParser extends BaseCommentParser {
+export default class FunctionCommentRaisesParser extends BaseCommentParser {
   constructor() {
     super();
     this.name = "Raises";

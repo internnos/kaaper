@@ -170,28 +170,30 @@ suite("function-comment: constructor: explicit-args", () => {
     assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
   })
 
+  test("parse whole scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const explicitArgsParser = new FunctionCommentExplicitArgsParser();
 
-  // test("parse whole scope", () => {
-  //   const pathFile = path.resolve(
-  //     __dirname,
-  //     "../../../../../test_assets/ERC20.cairo"
-  //   );
-  //   const functionText = CairoParser.parseFunctionScope(
-  //     pathFile,
-  //     "constructor"
-  //   );
-  //   const commentText = CairoParser.parseCommentLines(functionText);
-  //   const explicitArgsParser = new FunctionCommentExplicitArgsParser();
-  //   const targetLineParsing = [
-  //     {name: "syscall_ptr", type: "felt*", desc: ""}, 
-  //     {name: "pedersen_ptr", type: "HashBuiltin", desc: ""},
-  //     {name: "range_check_ptr", type: "", desc: ""}
-  //   ];
+    const targetLineParsing = [
+      {name: "name", type: "felt", desc: "name of the token"},
+      {name: "symbol", type: "felt", desc: "symbol of the token"},
+      {name: "decimals", type: "Uint256", desc: "floating point of the token"},
+      {name: "initial_supply", type: "Uint256", desc: "amount of initial supply of the token"},
+      {name: "recipient", type: "felt", desc: "the address of recipient of the initial supply"}
 
-  //   const resultLineParsing = explicitArgsParser.parseCommentLines(commentText!);
+    ]
+    const resultLineParsing = explicitArgsParser.parseCommentLines(commentText!);
     
-  //   assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing on whole scope`);
-  // })
+    assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing on whole scope`);
+  })
 
 
 

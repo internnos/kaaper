@@ -13,16 +13,22 @@ export abstract class BaseCommentParser {
     this.name = ""
   }
 
-  setStartScope(line: string) {
+  isStartScope(line: string): boolean {
     const result = line.match(this.startEndScopeRegexp);
     if (result) {
       if (result[1] === this.name) {
-        this.runningScope = true;
-        this.startLine = line;
+        return true
       }
     }
+    return false
   }
 
+  setStartScope(line: string) {
+    if (this.isStartScope(line)===true) {
+      this.runningScope = true;
+      this.startLine = line;
+    }
+  }
 
   isEndScope(line: string): boolean {
     const result = line.match(this.startEndScopeRegexp);
@@ -49,18 +55,17 @@ export abstract class BaseCommentParser {
     var result : Array<FunctionComment> = [];
 
     for (const line of lines) {
-      this.setStartScope(line)
-      if (this.isEndScope(line) === true) {
-        this.setEndScope(line)
-      }
-      if (this.runningScope === true && this.startLine !== line)   {
-        console.log(line)
+      this.setStartScope(line);
+      this.setEndScope(line);
+      if (this.runningScope === true && this.startLine !== line && this.endScope === false) {
         const functionComment = this.parseCommentLine(line)
         if (functionComment) {
           result.push(functionComment)
         }
       }
-      
+    }
+    if (result.length > 0) {
+      return result
     }
     return null
   }

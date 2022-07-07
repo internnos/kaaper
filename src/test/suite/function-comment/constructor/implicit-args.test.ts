@@ -109,6 +109,7 @@ suite("function-comment: constructor: implicit-args", () => {
     const line = 5;
     assert.equal("#   range_check_ptr", commentText![line].trim(), `check line ${line}`);
     assert.notEqual(commentText![line], implicitArgsParser.startLine);
+    assert.equal(false, implicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
 
     assert.equal(true, implicitArgsParser.runningScope, `failed to get running scope line ${line}`);
     const resultLineParsing = implicitArgsParser.parseCommentLine(commentText![line]);
@@ -117,6 +118,34 @@ suite("function-comment: constructor: implicit-args", () => {
     assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing line ${line}`);
 
     assert.equal(false, implicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+  })
+
+  test("parse line 6", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const implicitArgsParser = new FunctionCommentImplicitArgsParser();
+    implicitArgsParser.setStartScope(commentText![2]);
+
+    const line = 6;
+    assert.equal("# Explicit args:", commentText![line].trim(), `check line ${line}`);
+    assert.notEqual(commentText![line], implicitArgsParser.startLine);
+
+    assert.equal(true, implicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+    implicitArgsParser.setEndScope(commentText![line]);
+
+    assert.equal(false, implicitArgsParser.runningScope, `failed to get running scope line ${line}`);
+    const resultLineParsing = implicitArgsParser.parseCommentLine(commentText![line]);
+    
+    
+    assert.deepEqual(null, resultLineParsing, `failed to get resultLineParsing line ${line}`);
+    
   })
 
 });

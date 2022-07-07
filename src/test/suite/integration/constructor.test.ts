@@ -65,11 +65,34 @@ test("parse whole scope", () => {
     const functionCommentReturnsResult = functionCommentReturnsParser.parseCommentLines(commentLines!);
     const functionCommentRaisesResult = functionCommentRaisesParser.parseCommentLines(commentLines!);
 
+    const functionCommentDescParserTarget = [{name: "", type: "", desc: "Initialize the contract"}];
+    const functionCommentImplicitArgsParserTarget = [
+      {name: "syscall_ptr", type: "felt*", desc: ""}, 
+      {name: "pedersen_ptr", type: "HashBuiltin", desc: ""},
+      {name: "range_check_ptr", type: "", desc: ""}
+    ];
+    const functionCommentExplicitArgsParserTarget = [
+      {name: "name", type: "felt", desc: "name of the token"},
+      {name: "symbol", type: "felt", desc: "symbol of the token"},
+      {name: "decimals", type: "Uint256", desc: "floating point of the token"},
+      {name: "initial_supply", type: "Uint256", desc: "amount of initial supply of the token"},
+      {name: "recipient", type: "felt", desc: "the address of recipient of the initial supply"}
+    ]
+    const functionCommentReturnsParserTarget =  [
+      {name: "", type: "", desc: "None"},
+    ]
 
-    
+    const functionCommentRaisesParserTarget = [
+      {name: "decimals", type: "", desc: "decimals exceed 2^8"},
+      {name: "recipient", type: "", desc: "cannot mint to the zero address"},
+      {name: "initial_supply", type: "", desc: "not valid Uint256"},
+      {name: "initial_supply", type: "", desc: "mint overflow"}
+    ]
 
-    // assert.deepEqual(functionSignatureImplicitArgsTarget, functionCommentImplicitArgsResult, "failed to get explicit args");
-    
-    
+    assert.deepEqual(functionCommentDescParserTarget, functionCommentDescParserResult, "failed to get desc");
+    assert.deepEqual(functionCommentImplicitArgsParserTarget, functionCommentImplicitArgsResult, "failed to get implicit args");
+    assert.deepEqual(functionCommentExplicitArgsParserTarget, functionCommentExplicitArgsResult, "failed to get explicit args");
+    assert.deepEqual(functionCommentReturnsParserTarget, functionCommentReturnsResult, "failed to get returns");
+    assert.deepEqual(functionCommentRaisesParserTarget, functionCommentRaisesResult, "failed to get raises");
 
   });

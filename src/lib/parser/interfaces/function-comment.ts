@@ -56,12 +56,10 @@ export abstract class BaseCommentParser {
 
     for (const line of lines) {
       this.setStartScope(line);
-      this.setEndScope(line);
-      if (this.runningScope === true && this.startLine !== line && this.endScope === false) {
-        const functionComment = this.parseCommentLine(line)
-        if (functionComment) {
-          result.push(functionComment)
-        }
+      this.setEndScope(line)
+      const functionComment = this.parseCommentLine(line)
+      if (functionComment) {
+        result.push(functionComment)
       }
     }
     if (result.length > 0) {

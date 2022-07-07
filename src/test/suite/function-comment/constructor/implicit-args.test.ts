@@ -134,10 +134,13 @@ suite("function-comment: constructor: implicit-args", () => {
     implicitArgsParser.setStartScope(commentText![2]);
 
     const line = 6;
+
+    assert.equal(false, implicitArgsParser.isStartScope(commentText![line]), `check line ${line}`);
+    assert.equal(true, implicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
+
     assert.equal("# Explicit args:", commentText![line].trim(), `check line ${line}`);
     assert.notEqual(commentText![line], implicitArgsParser.startLine);
 
-    assert.equal(true, implicitArgsParser.isEndScope(commentText![line]), `failed to get end scope line ${line}`);
     implicitArgsParser.setEndScope(commentText![line]);
 
     assert.equal(false, implicitArgsParser.runningScope, `failed to get running scope line ${line}`);
@@ -145,7 +148,32 @@ suite("function-comment: constructor: implicit-args", () => {
     
     
     assert.deepEqual(null, resultLineParsing, `failed to get resultLineParsing line ${line}`);
-    
   })
+
+  test("parse whole scope", () => {
+    const pathFile = path.resolve(
+      __dirname,
+      "../../../../../test_assets/ERC20.cairo"
+    );
+    const functionText = CairoParser.parseFunctionScope(
+      pathFile,
+      "constructor"
+    );
+    const commentText = CairoParser.parseCommentLines(functionText);
+    const implicitArgsParser = new FunctionCommentImplicitArgsParser();
+    // implicitArgsParser.setStartScope(commentText![2]);
+
+    const targetLineParsing = [
+      {name: "syscall_ptr", type: "felt*", desc: ""}, 
+      {name: "pedersen_ptr", type: "HashBuiltin", desc: ""},
+      {name: "range_check_ptr", type: "", desc: ""}
+    ];
+
+    const resultLineParsing = implicitArgsParser.parseCommentLines(commentText!);
+    
+    assert.deepEqual(targetLineParsing, resultLineParsing, `failed to get resultLineParsing on whole scope`);
+  })
+
+
 
 });

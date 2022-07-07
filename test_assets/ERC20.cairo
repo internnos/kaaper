@@ -27,6 +27,11 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     #   recipient(felt): the address of recipient of the initial supply
     # Returns:
     #   None
+    # Raises:
+    #   decimals: decimals exceed 2^8
+    #   recipient: cannot mint to the zero address
+    #   initial_supply: not valid Uint256
+    #   initial_supply: mint overflow
     ERC20.constructor(name, symbol, decimals)
     ERC20._mint(recipient, initial_supply)
     return ()
